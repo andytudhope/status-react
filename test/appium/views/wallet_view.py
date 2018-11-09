@@ -143,6 +143,12 @@ class AssetTextElement(BaseText):
         self.locator = self.Locator.accessibility_id('%s-asset-value-text' % asset_name.lower())
 
 
+class CollectibleTextElement(BaseText):
+    def __init__(self, driver, collectible_name):
+        super().__init__(driver)
+        self.locator = self.Locator.accessibility_id('%s-collectible-value-text' % collectible_name.lower())
+
+
 class AssetCheckBox(BaseButton):
     def __init__(self, driver, asset_name):
         super(AssetCheckBox, self).__init__(driver)
@@ -265,3 +271,7 @@ class WalletView(BaseView):
 
     def asset_checkbox_by_name(self, asset_name):
         return AssetCheckBox(self.driver, asset_name)
+
+    def collectible_amount_by_name(self, name):
+        elm = CollectibleTextElement(self.driver, name)
+        return elm.text
